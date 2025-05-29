@@ -1,0 +1,7 @@
+cradle:
+  stack:
+    - path: "./src"
+      component: "avatarFuncional:lib"
+
+    - path: "./test"
+      component: "avatarFuncional:test:avatarFuncional-test"
