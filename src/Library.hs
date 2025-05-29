@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
+{-# HLINT ignore "Use newtype instead of data" #-}
 module Library where
 import PdePreludat
 
@@ -8,10 +10,13 @@ data Personaje = UnPersonaje {
     elementos :: [String]
 }deriving (Show,Eq)
 
+losPersonajes :: [Personaje]
+losPersonajes = [toph,katara,zuko,sokka,aang]
+
 losElementos :: [String]
 losElementos = ["Fuego","Aire","Tierra","Agua","Rayo","Metal","Lava","Sangre"]
 
--- algunos Personajes
+-- Personajes Modelados
 
 toph :: Personaje
 toph = UnPersonaje ["Tierra"]
@@ -37,7 +42,7 @@ esMaestro = not . null . elementos
 -- Una determinada persona es maestra de un determinado elemento
 
 esMaestroDe :: String -> Personaje -> Bool
-esMaestroDe elemento personaje = elemento `elem` (elementos personaje)
+esMaestroDe elemento personaje = elemento `elem` elementos personaje
 
 -- Qué elementos domina un determinado maestro.
 
@@ -46,12 +51,17 @@ deQueEsMaestro = elementos
 
 -- Quiénes son maestros de un determinado elemento.
 
-quienesSonMaestrosDe :: String -> [Personaje] -> [Personaje]
-quienesSonMaestrosDe elemento = filter (esMaestroDe elemento)
+quienesSonMaestrosDe :: String -> [Personaje]
+quienesSonMaestrosDe elemento = filter (esMaestroDe elemento) losPersonajes
 
--- Es cierto que cierto elemento existe (Debo determinar la lista de elementos existentes para poder realizarlo)
+-- Es cierto que cierto elemento existe 
 
 existeElemento :: String -> Bool
 existeElemento elemento = elemento `elem` losElementos
 
--- no se puede determinar todos los maestros existentes debido a que no hay principio de Universo Cerrado.
+-- Todos los personajes
+
+todosLosPersonajes :: [Personaje]
+todosLosPersonajes = losPersonajes
+todosLosElementos :: [String]
+todosLosElementos = losElementos
