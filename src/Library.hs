@@ -62,6 +62,6 @@ existeElemento elemento = elemento `elem` losElementos
 -- Todos los personajes
 
 todosLosPersonajes :: [Personaje]
-todosLosPersonajes = losPersonajes
+todosLosPersonajes = filter esMaestro losPersonajes
 todosLosElementos :: [String]
 todosLosElementos = losElementos
