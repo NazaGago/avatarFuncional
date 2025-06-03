@@ -23,7 +23,7 @@ todosLosPersonajes = [UnPersonaje "Toph" ["Tierra"], UnPersonaje "Katara" ["Agua
 -- Cuando alguien tiene el control de uno de ellos, le llamamos "maestro".
 
 esMaestro :: Nombre -> Bool
-esMaestro unNombre = (not . null . elementos . head . filter ((==unNombre) . nombre)) todosLosPersonajes  
+esMaestro unNombre = any (\maestro -> unNombre == nombre maestro && elementos maestro \= []) todosLosPersonajes
 
 -- Una determinada persona es maestra de un determinado elemento
 
