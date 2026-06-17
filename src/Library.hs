@@ -9,7 +9,7 @@ doble numero = numero + numero
 data Personaje = UnPersonaje {
     nombre :: Nombre,
     elementos :: [Elemento]
-}deriving (Show,Eq)
+} deriving (Show,Eq)
 
 type Nombre = String
 type Elemento = String
@@ -21,16 +21,20 @@ todosLosPersonajes = [UnPersonaje "Toph" ["Tierra"], UnPersonaje "Katara" ["Agua
 
 
 -- Cuando alguien tiene el control de uno de ellos, le llamamos "maestro".
+esMaestro' :: Personaje -> Bool
+esMaestro' pers = length (elementos pers) > 0
+
+
 
 esMaestro :: Nombre -> Bool
-esMaestro unNombre = any (\maestro -> unNombre == nombre maestro && elementos maestro \= []) todosLosPersonajes
+esMaestro unNombre = any (\maestro -> unNombre == nombre maestro && elementos maestro /= []) todosLosPersonajes
 
 -- Una determinada persona es maestra de un determinado elemento
 
-esMaestroDe :: String -> String -> Bool
-esMaestroDe unPersonaje unElemento = any (tieneNombreYElemento unPersonaje unElemento) todosLosPersonajes
+esMaestroDe :: Nombre -> Elemento -> Bool
+esMaestroDe unNombre unElemento = any (tieneNombreYElemento unNombre unElemento) todosLosPersonajes
 
-tieneNombreYElemento :: String -> String -> Personaje -> Bool
+tieneNombreYElemento :: Nombre -> Elemento -> Personaje -> Bool
 tieneNombreYElemento unNombre unElemento personaje = unNombre == nombre personaje && unElemento `elem` elementos personaje
 
 -- Qué elementos domina un determinado personaje.
@@ -40,8 +44,8 @@ queElementosDomina unNombre =  (elementos . head . filter ((==unNombre) . nombre
 
 --Quiénes son maestros de un determinado elemento.
 
-quienesSonMaestrosDe :: Elemento -> [Nombre]
-quienesSonMaestrosDe elemento = (map nombre . filter (elem elemento . elementos)) todosLosPersonajes
+quienesSonMaestrosDe :: Elemento -> [Personaje]
+quienesSonMaestrosDe elemento = filter (elem elemento . elementos) todosLosPersonajes
 
 -- Es cierto que cierto elemento existe 
 
